@@ -1,0 +1,6 @@
+{
+  "name": "SKYDEV LABS",
+  "description": "AI • Web • Apps • Innovation - Official technology startup website founded by Sanjay Raikwar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
