@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'happysanjay000@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidContactMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'message']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+             data.email is string && data.email.size() >= 5 && data.email.size() <= 150 &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 3000;
+    }
+
+    // Public contact message submissions
+    match /contact_messages/{messageId} {
+      allow create: if isValidId(messageId) && isValidContactMessage(incoming());
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Public projects collection
+    match /projects/{projectId} {
+      allow get, list: if true;
+      allow write: if isAdmin();
+    }
+
+    // Public educational notes collection
+    match /notes/{noteId} {
+      allow get, list: if true;
+      allow write: if isAdmin();
+    }
+
+    // Admin authorization document
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}

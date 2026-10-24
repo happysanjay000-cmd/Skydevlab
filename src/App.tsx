@@ -18,6 +18,7 @@ import { NotesSection } from './components/NotesSection';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { AdminModal } from './components/AdminModal';
+import { testConnection } from './services/firebase';
 
 export default function App() {
   const [db, setDb] = useState<AppDatabase>(() => dataStore.getData());
@@ -25,6 +26,11 @@ export default function App() {
   const [themeMode, setThemeMode] = useState<'dark' | 'glow'>('glow');
   const [activeSection, setActiveSection] = useState('home');
   const [prefilledService, setPrefilledService] = useState<string>('');
+
+  // Initialize and verify Firebase connection
+  useEffect(() => {
+    testConnection();
+  }, []);
 
   // Refresh local state when dataStore changes in Admin
   const handleDataUpdated = () => {

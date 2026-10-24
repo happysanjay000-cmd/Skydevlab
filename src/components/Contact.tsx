@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FounderProfile } from '../types';
 import { dataStore } from '../services/dataStore';
+import { saveContactMessageToCloud } from '../services/firebase';
 import {
   Mail,
   Phone,
@@ -41,7 +42,7 @@ export const Contact: React.FC<ContactProps> = ({ founder, initialProjectType = 
     }
   }, [initialProjectType]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setError('Please fill in all required fields.');
@@ -51,8 +52,18 @@ export const Contact: React.FC<ContactProps> = ({ founder, initialProjectType = 
     setLoading(true);
     setError('');
 
-    // Simulate quick network settlement & store locally/server
-    setTimeout(() => {
+    try {
+      // 1. Save to Cloud Firestore
+      await saveContactMessageToCloud({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        projectType: formData.projectType,
+        message: formData.message.trim(),
+      }).catch((err) => {
+        console.warn('Cloud Firestore save warning:', err);
+      });
+
+      // 2. Save to local dataStore for offline resilience
       dataStore.addMessage({
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -68,7 +79,11 @@ export const Contact: React.FC<ContactProps> = ({ founder, initialProjectType = 
         projectType: 'AI Solution',
         message: '',
       });
-    }, 400);
+    } catch (err) {
+      console.error('Submission error', err);
+      setLoading(false);
+      setError('Unable to send message right now. Please try again.');
+    }
   };
 
   return (

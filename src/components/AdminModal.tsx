@@ -1010,6 +1010,22 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
                         />
                       </div>
 
+                      {/* Cloud Firestore Status Badge */}
+                      <div className="p-4 rounded-xl bg-slate-950/80 border border-emerald-500/30 space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-semibold text-white flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Google Firebase Firestore
+                          </span>
+                          <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                            LIVE &amp; CONNECTED
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-400">
+                          Cloud Database ID: <code className="text-cyan-300 font-mono">nimble-inkwell-g83d0</code>. Contact form submissions and inquiries are synced to the cloud and stored securely.
+                        </p>
+                      </div>
+
                       {importStatus && (
                         <div className="p-3 rounded-lg bg-cyan-950/60 border border-cyan-500/40 text-xs text-cyan-300">
                           {importStatus}

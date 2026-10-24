@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "Incoming project inquiries from website visitors",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "description": "Sender full name"
+        },
+        "email": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 150,
+          "description": "Sender email address"
+        },
+        "projectType": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Requested service category"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 3000,
+          "description": "Message content"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Submission date string"
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether message was reviewed"
+        }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Featured software, AI tools, and web applications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "fullDetails": { "type": "string", "maxLength": 5000 },
+        "demoUrl": { "type": "string", "maxLength": 500 },
+        "githubUrl": { "type": "string", "maxLength": 500 },
+        "published": { "type": "boolean" },
+        "date": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["title", "category", "description"]
+    },
+    "StudyNote": {
+      "title": "Study Note",
+      "description": "Curriculum educational notes and exam derivations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 250 },
+        "classCategory": { "type": "string", "maxLength": 100 },
+        "subject": { "type": "string", "maxLength": 100 },
+        "summary": { "type": "string", "maxLength": 1500 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "readTime": { "type": "string", "maxLength": 50 },
+        "published": { "type": "boolean" },
+        "date": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["title", "classCategory", "subject", "summary", "content"]
+    }
+  },
+  "firestore": {
+    "/contact_messages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Public contact submissions and inquiries"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Public portfolio projects"
+    },
+    "/notes/{noteId}": {
+      "schema": "StudyNote",
+      "description": "Public academic study notes"
+    }
+  }
+}
