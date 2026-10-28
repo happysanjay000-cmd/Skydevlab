@@ -53,7 +53,8 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (pinInput === 'sanjay2026' || pinInput === 'admin') {
+    const cleanPin = pinInput.trim();
+    if (cleanPin === 'sanjay000' || cleanPin === 'sanjay2026' || cleanPin === 'admin') {
       setIsAuthenticated(true);
       setPinError(false);
     } else {
@@ -188,8 +189,8 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
         {/* Top Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/90">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
-              <Lock className="w-4 h-4" />
+            <div className="w-9 h-9 rounded-lg bg-black border border-cyan-500/40 p-0.5 overflow-hidden flex items-center justify-center shadow-[0_0_10px_rgba(6,182,212,0.3)]">
+              <img src="/logo.png" alt="SKYDEVLAB Logo" className="w-full h-full object-cover rounded-md" />
             </div>
             <div>
               <h2 className="font-display text-lg font-bold text-white leading-tight">
@@ -212,8 +213,8 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
         {/* Auth Gate if not logged in */}
         {!isAuthenticated ? (
           <div className="flex-1 p-8 flex flex-col items-center justify-center max-w-md mx-auto text-center">
-            <div className="w-14 h-14 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-cyan-400 mb-4">
-              <Lock className="w-7 h-7" />
+            <div className="w-16 h-16 rounded-2xl bg-black border border-cyan-500/50 p-1 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.35)] mb-4">
+              <img src="/logo.png" alt="SKYDEVLAB" className="w-full h-full object-cover rounded-xl" />
             </div>
             <h3 className="font-display text-xl font-bold text-white mb-2">
               Founder &amp; Admin Access
@@ -228,14 +229,14 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
                   type="password"
                   value={pinInput}
                   onChange={(e) => setPinInput(e.target.value)}
-                  placeholder="Enter PIN (Default: sanjay2026)"
+                  placeholder="Enter PIN (sanjay000)"
                   className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 text-white placeholder-slate-500 text-center font-mono tracking-widest text-base outline-none"
                   autoFocus
                 />
               </div>
 
               {pinError && (
-                <p className="text-xs text-rose-400">Incorrect PIN. Try: sanjay2026</p>
+                <p className="text-xs text-rose-400">Incorrect PIN. Please enter: sanjay000</p>
               )}
 
               <button
@@ -247,10 +248,10 @@ export const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose, onDataU
 
               <button
                 type="button"
-                onClick={() => setPinInput('sanjay2026')}
+                onClick={() => setPinInput('sanjay000')}
                 className="text-[11px] text-cyan-400 hover:underline block mx-auto"
               >
-                Click to Auto-fill Default PIN (sanjay2026)
+                Click to Auto-fill Admin PIN (sanjay000)
               </button>
             </form>
           </div>

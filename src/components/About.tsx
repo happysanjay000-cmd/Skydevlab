@@ -59,12 +59,14 @@ export const About: React.FC<AboutProps> = ({ founder, onContactClick }) => {
                   {/* Glowing background inside card */}
                   <div className="absolute -top-20 -right-20 w-48 h-48 bg-cyan-500/15 rounded-full blur-3xl" />
                   
-                  {/* Stylized Avatar Avatar Badge */}
-                  <div className="relative w-28 h-28 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 p-1 shadow-[0_0_25px_rgba(6,182,212,0.4)] mb-5">
-                    <div className="w-full h-full rounded-[14px] bg-slate-950 flex flex-col items-center justify-center">
-                      <span className="font-display text-4xl font-extrabold bg-gradient-to-r from-cyan-300 to-sky-400 bg-clip-text text-transparent">
-                        SR
-                      </span>
+                  {/* Stylized Brand Logo Badge */}
+                  <div className="relative w-28 h-28 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-sky-400 p-1 shadow-[0_0_25px_rgba(6,182,212,0.4)] mb-5 group">
+                    <div className="w-full h-full rounded-[14px] bg-black flex items-center justify-center p-1.5 overflow-hidden">
+                      <img
+                        src="/logo.png"
+                        alt="SKYDEV LABS Official Brand Logo"
+                        className="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
                   </div>
 

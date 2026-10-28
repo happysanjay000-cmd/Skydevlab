@@ -113,6 +113,12 @@ export const Hero: React.FC<HeroProps> = ({ onExploreWork, onContactClick }) => 
                     </div>
                   </div>
 
+                  {/* Top floating official brand pill */}
+                  <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md border border-cyan-500/40 rounded-xl px-2.5 py-1.5 flex items-center gap-2 shadow-xl">
+                    <img src="/logo.png" alt="SKYDEVLAB" className="w-5 h-5 rounded-md object-cover" />
+                    <span className="text-[11px] font-bold text-cyan-300 font-display tracking-wide">SKYDEVLAB</span>
+                  </div>
+
                   {/* Top floating mini pill */}
                   <div className="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 rounded-lg px-2.5 py-1 flex items-center gap-1.5 shadow-lg">
                     <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
